@@ -20,6 +20,7 @@ lab = perfusion(:,:,:,2:2:60);
 deltaM = sum(abs(con-lab),4)./30;
 
 % Parameters
+T1vals = T1vals.*1000;
 TR = 15703;
 M0 = (sum(con,4)./30)./(1-exp(-TR./T1vals));
 lambda= 0.9;
