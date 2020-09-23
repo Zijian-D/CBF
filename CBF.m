@@ -33,4 +33,11 @@ tau = 3000;
 CBF_vals=(6000*lambda.*deltaM.*exp(w./T1b))./(2.*IE.*T1vals.*M0.*(1.-exp(-tau./T1vals)))*1000;
 CBF_vals(CBF_vals>500)=0;
 
+%Smooth
+mask = CBF_vals;
+mask(CBF_vals>0)=1;
+BW = bwareaopen(mask,16,8);
+CBF_vals = CBF_vals.*BW;
+gf = fspecial('gaussian',[3 3],1);
+CBF_vals = imfilter(CBF_vals,gf);
 
